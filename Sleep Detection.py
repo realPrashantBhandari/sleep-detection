@@ -33,10 +33,6 @@ while True:
     i = 0
     for face in faces:
         if i == 0:
-            #print(face)
-            #x1,y1 = face.left(), face.top()
-            #x2,y2 = face.right(), face.bottom()
-            #cv2.rectangle(frame, (x1,y1),(x2,y2), (0,255,255), 2)
 
             landmarks = predictor(gray, face)
             # Left eye
@@ -74,8 +70,6 @@ while True:
             reye_horlength = find_length(reye_lpoint,reye_rpoint)
             
             # Blink detection
-            #print(leye_verlength)
-            #print(reye_verlength)
             if leye_verlength == 0:
                 leye_verlength=1
             if reye_verlength == 0:
@@ -83,10 +77,6 @@ while True:
             leye_ratio = leye_horlength/leye_verlength
             reye_ratio = reye_horlength/reye_verlength
 
-            # print(leye_ratio)
-            # print(reye_ratio)
-            # print("Left eye : Horizontal= %d , Vertical= %d" % (leye_horlength,leye_verlength))
-            # print("Right eye : Horizontal= %d , Vertical= %d" % (reye_horlength,reye_verlength))
             start = time.time()
             blinking_ratio = (leye_ratio+reye_ratio)/2
             
@@ -95,7 +85,7 @@ while True:
                 start = time.time()
             elif blinking_ratio <= 5 or angle >34:
                 end = time.time()
-            #print(start - end) 
+
             if end != 0 and start != 0:
                 if (start - end >5):
                     sleep_status = 1          
